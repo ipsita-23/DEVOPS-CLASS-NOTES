@@ -1,0 +1,21 @@
+docker --version
+docker info
+docker pull httpd       // to pull the image from dockerhub
+docker history httpd    //shows the history of docker image with the image name mentioned in the command (httpd-image name)
+docker history python   //(python-image name)
+docker images           //list of all the images in our docker desktop along with their IDs, disk usage, content size 
+docker run              // to create and start a new container, used with some executable commands
+
+EXECUTABLE COMMANDS to be used with docker run :
+	-it       : runs the container in interactive mode allowing u to interact with the container in the interactive mode
+	-d        : runs the container in the background, detached mode
+	--name    : specifies a name for the container
+	--rm      : automatically removes the container when it exits
+	-p        : maps a host port to a container port
+	-e/ --env : sets an environment variable inside the container
+	-v        : mounts a host volume inside the container
+	examples: docker run -it httpd , docker run -d httpd
+docker ps :shows all running containers
+docker ps -a :shows all the containers
+docker run httpd "Hello, World!"                             //randomly takes any container, gives name itself
+docker run --name my-container httpd echo "Hello, World!"   //running a container with a predefined name , here: my-container
