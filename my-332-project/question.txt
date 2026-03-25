@@ -1,0 +1,1 @@
+we will create a simple app where a value is fixed inside the image

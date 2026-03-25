@@ -1,0 +1,5 @@
+#dockerfile is used to create a docker image that runs a shellscript automatically when the container starts
+FROM ubuntu
+COPY app.sh /app.sh
+RUN chmod +x /app.sh
+CMD ["/app.sh"]
