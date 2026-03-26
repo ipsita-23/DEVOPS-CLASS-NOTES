@@ -17,5 +17,20 @@ EXECUTABLE COMMANDS to be used with docker run :
 	examples: docker run -it httpd , docker run -d httpd
 docker ps :shows all running containers
 docker ps -a :shows all the containers
-docker run httpd "Hello, World!"                             //randomly takes any container, gives name itself
+docker run httpd echo "Hello, World!"                             //randomly takes any container, gives name itself
 docker run --name my-container httpd echo "Hello, World!"   //running a container with a predefined name , here: my-container
+
+// dockerfile is used to create a docker image that runs a shellscript automatically when the container starts
+
+docker build -t myapp:v1 .
+docker run -e MODE=production myapp:v1
+docker run -e MY_VAR=value httpd env
+
+docker run -it -e MY_NAME=Ipsita ubuntu bash
+root@a7ba69f33284:/# echo $MY_NAME
+Ipsita
+
+docker run -d -e APP_ENV=production -e APP_VERSION=1.0 nginx
+docker exec -it 3bad599d61b env 
+
+docker run -d -e MYSQL_ROOT_PASSWORD=root123 -e MYSQL_DATABASE=college -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 mysql:8
