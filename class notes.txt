@@ -17,7 +17,7 @@ EXECUTABLE COMMANDS to be used with docker run :
 	examples: docker run -it httpd , docker run -d httpd
 docker ps :shows all running containers
 docker ps -a :shows all the containers
-docker run httpd echo "Hello, World!"                             //randomly takes any container, gives name itself
+docker run httpd echo "Hello, World!"                             //randomly takes any container, gives name by itself
 docker run --name my-container httpd echo "Hello, World!"   //running a container with a predefined name , here: my-container
 
 // dockerfile is used to create a docker image that runs a shellscript automatically when the container starts
@@ -33,4 +33,48 @@ Ipsita
 docker run -d -e APP_ENV=production -e APP_VERSION=1.0 nginx
 docker exec -it 3bad599d61b env 
 
-docker run -d -e MYSQL_ROOT_PASSWORD=root123 -e MYSQL_DATABASE=college -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 mysql:8
+docker run -d -e MYSQL_ROOT_PASSWORD=root123 -e MYSQL_DATABASE=college -e MYSQL_USER=admin -e MYSQL_PASSWORD=admin123 mysql:8 
+
+-p stands for publish port -> it maps a port on your host machine to a port inside the container.
+Without -p -> runs in an isolated environment
+docker run -p <HOST PORT><CONTAINER PORT> IMAG
+docker run -p 8080:80 nginx
+
+
+Q. Run a docker container named "DB-app" based on the "mongodb" image and expose port 80 on the host to port 8082 on the container.
+
+docker run -d  --name DB-app -p 80:8082 mongodb
+
+
+Docker provides 3 types of data storage:
+1. Volumes-
+   is persistent, is managed by docker, used in databases, production
+2. Bind Mounts-
+   is persistent, not managed by docker, used for development
+3. tmpfs-
+   not persistent, managed by docker in memory, used for secrets, cache
+
+
+Docker Volumes- Independent of container lifecycle, can be shared by multiple containers, managed fully by a docker
+
+Without volumes-> data is stored inside the container, and on deleting the container, data is lost
+With volumes-> data is stored on the host machine, containers can be recreated without losing data
+
+docker volume create <volume name>
+docker volume ls
+docker volume inspect mydata
+docker run -d -v <volumename>:<path where to store in image> --name <containername><imagename> 
+eg:
+docker volume create mydata
+docker volume ls
+docker volume inspect mydata
+docker run -dit -v mydata:/app/data --name cont1 ubuntu  //-v: for volume , mydata:/app/data ->container address
+docker exec -it cont1 bash
+ echo "Hello Docker Volume">/app/data/file1.txt
+ cat /app/data/file1.txt
+ exit
+docker rm -f cont1
+docker run -it -v mydata:/app/data ubuntu bash
+cat /app/data/file1.txt
+exit
+docker volume rm mydata
