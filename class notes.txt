@@ -77,4 +77,9 @@ docker rm -f cont1
 docker run -it -v mydata:/app/data ubuntu bash
 cat /app/data/file1.txt
 exit
-docker volume rm mydata
+docker volume rm mydata 
+
+
+Q. You need to start a new container using the nginx image while setting an environment variable ENV_MODE=Production. Write the docker run command to achieve this.
+
+docker run -d --name my-new-container -e ENV_MODE=Production nginx 
