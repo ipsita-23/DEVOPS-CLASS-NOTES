@@ -83,3 +83,17 @@ docker volume rm mydata
 Q. You need to start a new container using the nginx image while setting an environment variable ENV_MODE=Production. Write the docker run command to achieve this.
 
 docker run -d --name my-new-container -e ENV_MODE=Production nginx 
+
+
+Q. You need to start a new container using the nginx image while setting an env variable ENV_MODE=production. Write the docker run command to achieve this.
+
+docker run -e ENV_MODE=production nginx
+
+Q. You've a running container named my_app, but it is not behaving as expected. You want to check its logs to debug any errors. Write the commands to view its logs and follow new log entries in real time.
+
+docker logs -f my_app
+
+Q. A container named web_server was stopped. Write the command to: a) start the container again b) stop the container when needed.
+
+a) docker start web_server
+b) docker stop web_server
