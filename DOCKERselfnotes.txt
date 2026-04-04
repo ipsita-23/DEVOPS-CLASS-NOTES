@@ -1,0 +1,26 @@
+DOCKER
+
+Use Docker for:
+Backend deployment
+Microservices
+Running databases (MongoDB, MySQL)
+ML model serving
+CI/CD pipelines
+
+Docker commands:
+docker --version        //checks if docker is installed, if yes then which version
+docker info             //shows detailed information about your Docker setup — basically a full status report of the Docker engine.
+docker pull httpd       // to pull the image from dockerhub
+docker history httpd    //shows the history of docker image with the image name mentioned in the command (httpd-image name)
+docker history python   //(python-image name)
+docker images           //list of all the images in our docker desktop along with their IDs, disk usage, content size 
+docker run              //to create and start a new container, used with some executable commands
+docker search nginx     //we can search in the dockerhub if a particular image exists, here-nginx.
+docker run nginx        //running nginx container (creates a copy of nginx and uses it, lly like instance of a class)
+docker start nginx      // only to create a container ,not start
+docker start <containerID> //to start the existing container
+docker start <container_name> //if we created the container with a name
+docker run -d --name nginx nginx   //here --name gives the container a name nginx
+docker stop nginx        //to stop the running container
+
+
