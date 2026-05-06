@@ -1,3 +1,31 @@
+DOCKER
+
+Use Docker for:
+Backend deployment
+Microservices
+Running databases (MongoDB, MySQL)
+ML model serving
+CI/CD pipelines
+
+Docker commands:
+docker --version        //checks if docker is installed, if yes then which version
+docker info             //shows detailed information about your Docker setup — basically a full status report of the Docker engine.
+docker pull httpd       // to pull the image from dockerhub
+docker history httpd    //shows the history of docker image with the image name mentioned in the command (httpd-image name)
+docker history python   //(python-image name)
+docker images           //list of all the images in our docker desktop along with their IDs, disk usage, content size 
+docker run              //to create and start a new container, used with some executable commands
+docker search nginx     //we can search in the dockerhub if a particular image exists, here-nginx.
+docker run nginx        //running nginx container (creates a copy of nginx and uses it, lly like instance of a class)
+docker start nginx      // only to create a container ,not start
+docker start <containerID> //to start the existing container
+docker start <container_name> //if we created the container with a name
+docker run -d --name nginx nginx   //here --name gives the container a name nginx
+docker stop nginx        //to stop the running container
+
+
+
+
 docker --version
 docker info
 docker pull httpd       // to pull the image from dockerhub
@@ -96,4 +124,53 @@ docker logs -f my_app
 Q. A container named web_server was stopped. Write the command to: a) start the container again b) stop the container when needed.
 
 a) docker start web_server
-b) docker stop web_server
+b) docker stop web_server 
+
+Q1. Update the ubuntu container, install apache and php, then push updated on to docker hub.
+
+   docker pull ubuntu
+   docker run -it --name my_ubuntu ubuntu
+   apt update
+   apt install -y apache2 php libapache2-mod-php
+   apache2 -v
+   php -v
+   exit
+   docker commit my_ubuntu your_dockerhub_username/ubuntu-apache-php
+   docker login
+   docker push your_dockerhub_username/ubuntu-apache-php
+
+
+Q2. Compare the size of base image and updated image after commit.
+Q3. Creating a python flask web app( run a python web application inside docker so it works anywhere without setup issues). 
+
+individual project- practical applications of the concepts learned regarding docker, maven,gihtub, actions and jenkins
+GHCR
+
+Q4. Imagine you're managing a project with multiple containers. Answer the following:
+  a)How will you build an image and run a container? 
+docker build -t my-app-image:v1 .
+docker run -d --name my-running-app -p 8080:80 my-app-image:v1
+  b)How do you save changes made to a running container? 
+docker commit my-running-app my-new-custom-image:v2
+
+  c)How can you go inside containers(for eg., a web app and a database)?
+ for web app: docker exec -it web_app_container sh
+ for database: docker exec -it db_container bash
+  d)How to pull image from docker hub?
+docker pull nginx:latest
+
+Q5.You are assigned a basic DevOps task to deploy a static web page with Docker. Your objective is to pull the latest NGINX docker image, create a simple HTML page, run the container and display the HTML page using NGINX static hosting. Use docker volume mounting to connect your HTML file to the container.
+
+Q6. You are required to create a customized MySQL Docker image with a preloaded database and publish it to GitHub Container Registry (GHCR) then pull and verify it on another system.
+
+Q. Design an docker compose configuration using environment variables to configure communication between a Node.js backend service and a MongoDB database service.
+
+Q. A company wants to build a high performance backend service using  C++ that communicates with a MongoDB database. Design a docker compose setup to deploy both services using env variables.
+Q. Compare implementing a microservice using using Node.js and C++ in docker compose. Discuss performance complexity and scalability. 
+
+
+WORDPRESS + MySQL
+
+
+Q. Using docker compose, create a docker-compose.yml configuration to deploy a microservices based application consisting of 3 services- frontend, backend and database. The yaml file should define version, services, networks, volumes, include environment variables. Additionally, specify when to use build vs image fields in the yaml file and configure sevice dependency ordering so that backend services start only after the database. 
+Q. Pull the nginx image from the public repository on docker hub and create a container from it, run the container in detached mode, and display the list of running containers with appropriate commands.

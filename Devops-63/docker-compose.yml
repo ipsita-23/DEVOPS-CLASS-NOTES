@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+  database:
+    image: postgres:15
+    container_name: db_service
+    restart: always
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydb
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  backend:
+    build: ./backend   # use build since we have custom backend code
+    container_name: backend_service
+    restart: always
+    depends_on:
+      - database
+    environment:
+      DB_HOST: database
+      DB_USER: myuser
+      DB_PASSWORD: mypassword
+      DB_NAME: mydb
+    ports:
+      - "5000:5000"
+    networks:
+      - app_network
+
+  frontend:
+    build: ./frontend   # custom frontend code
+    container_name: frontend_service
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"
+    networks:
+      - app_network
+
+volumes:
+  db_data:
+
+networks:
+  app_network:
+    driver: bridge
