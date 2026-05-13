@@ -1,4 +1,8 @@
-FROM ubuntu:latest
-LABEL maintainer="Student Demo"
-RUN apt update && apt install -y php
-CMD ["echo","Hello Students"]
+FROM mysql:8.0
+
+# Environment variables
+ENV MYSQL_ROOT_PASSWORD=root123
+ENV MYSQL_DATABASE=company_db
+
+# Copy SQL file into MySQL init directory
+COPY init.sql /docker-entrypoint-initdb.d/
